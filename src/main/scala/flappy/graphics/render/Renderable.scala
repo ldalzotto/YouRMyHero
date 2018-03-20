@@ -29,7 +29,7 @@ trait Renderable {
   }
 
 
-  val pr_matrix: Matrix4f = new Matrix4f().ortho(-Camera.CAMERA_WIDTH, Camera.CAMERA_WIDTH, -Camera.CAMERA_WIDTH * 9 / 16, Camera.CAMERA_WIDTH * 9 / 16, -1, 1)
+  val pr_matrix: Matrix4f = new Matrix4f().ortho(-Camera.CAMERA_WIDTH, Camera.CAMERA_WIDTH, -Camera.CAMERA_WIDTH * (1 / Camera.RATIO), Camera.CAMERA_WIDTH * (1 / Camera.RATIO), -1, 1)
 
   def render(): Unit = {
 
