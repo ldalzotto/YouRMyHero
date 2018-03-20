@@ -6,5 +6,5 @@ import org.jbox2d.dynamics.World
 object MyWorld {
 
   val world: World = new World(new Vec2(0, -10))
-
+  val WORLD_STEP_S = 0.005f
 }

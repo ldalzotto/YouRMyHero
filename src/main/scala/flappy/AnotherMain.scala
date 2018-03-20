@@ -23,6 +23,8 @@ class AnotherMain extends Runnable {
 
   var window: Long = _
 
+  var timer: Timer = _
+
   var bird: Bird = _
   var bird2: Bird = _
 
@@ -65,25 +67,28 @@ class AnotherMain extends Runnable {
     bird = new Bird(2f, 2f)
     bird2 = new Bird(5f, 10f, physicsPosition = new Vec2(0, 5f))
 
+    timer = new Timer(window)
+    timer.init()
   }
 
   def gameLoop(): Unit = {
 
     while (!glfwWindowShouldClose(window)) {
 
-      MyWorld.world.step(0.01f, 8, 6)
-
-      ground.update()
-      bird.update()
-      bird2.update()
-
-      glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
       glfwPollEvents()
 
-      ground.render()
-      bird.render()
-      bird2.render()
-      glfwSwapBuffers(window)
+      timer.updateTimer(() => {
+        glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
+        ground.render()
+        bird.render()
+        bird2.render()
+        glfwSwapBuffers(window)
+      }, (delta) => {
+        MyWorld.world.step(delta, 8, 3)
+        ground.update()
+        bird.update()
+        bird2.update()
+      })
 
 
       val error = GL11.glGetError
