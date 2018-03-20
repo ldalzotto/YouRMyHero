@@ -7,7 +7,9 @@ import org.jbox2d.collision.shapes.PolygonShape
 import org.jbox2d.common.Vec2
 import org.jbox2d.dynamics.{BodyDef, BodyType, FixtureDef}
 
-class Bird(override val physicsSize: Float, override val physicsPosition: Vec2 = new Vec2(0, 0)) extends GraphAndPhysEntity(physicsSize, physicsPosition) {
+class Bird(override val physicsWidthSize: Float,
+           override val physicsHeightSize: Float,
+           override val physicsPosition: Vec2 = new Vec2(0, 0)) extends GraphAndPhysEntity(physicsWidthSize, physicsHeightSize, physicsPosition) {
 
   override lazy val fixtureDefProvider: FixtureDefProvider = () => {
     val fixtureDef = new FixtureDef
@@ -24,7 +26,7 @@ class Bird(override val physicsSize: Float, override val physicsPosition: Vec2 =
 
   override lazy val shapeProvider: ShapeProvider = () => {
     val shape = new PolygonShape
-    shape.setAsBox(physicsSize / PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2, physicsSize / PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2)
+    shape.setAsBox(physicsWidthSize / PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2, physicsHeightSize / PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2)
     shape
   }
 

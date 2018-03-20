@@ -7,14 +7,15 @@ import org.joml.Matrix4f
 
 trait Renderable {
 
-  val physicsSize: Float
+  val physicsWidthSize: Float
+  val physicsHeightSize: Float
 
   val mesh: VertexArray = {
     val vertices = Array[Float](
-      -physicsSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, -physicsSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, 0.1f,
-      -physicsSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, physicsSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, 0.1f,
-      physicsSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, physicsSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, 0.1f,
-      physicsSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, -physicsSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, 0.1f)
+      -physicsWidthSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, -physicsHeightSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, 0.1f,
+      -physicsWidthSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, physicsHeightSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, 0.1f,
+      physicsWidthSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, physicsHeightSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, 0.1f,
+      physicsWidthSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, -physicsHeightSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, 0.1f)
 
     val indices = Array[Byte](0, 1, 2, 2, 3, 0)
 

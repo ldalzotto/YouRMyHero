@@ -61,9 +61,9 @@ class AnotherMain extends Runnable {
 
     glActiveTexture(GL_TEXTURE1)
 
-    ground = new Ground(1f, physicsPosition = new Vec2(0f, -5f))
-    bird = new Bird(2f)
-    bird2 = new Bird(5f, physicsPosition = new Vec2(0, 5f))
+    ground = new Ground(1f, 1f, physicsPosition = new Vec2(0f, -5f))
+    bird = new Bird(2f, 2f)
+    bird2 = new Bird(5f, 10f, physicsPosition = new Vec2(0, 5f))
 
   }
 
