@@ -2,18 +2,19 @@ package flappy.graphics
 
 import flappy.graphics.shader.Shader
 import flappy.graphics.texture.Texture
+import flappy.physics.PhysicsContants
 import org.joml.Matrix4f
 
 trait Renderable {
 
-  val SIZE: Float
+  val physicsSize: Float
 
   val mesh: VertexArray = {
     val vertices = Array[Float](
-      -SIZE / 2f, -SIZE / 2f, 0.1f,
-      -SIZE / 2f, SIZE / 2f, 0.1f,
-      SIZE / 2f, SIZE / 2f, 0.1f,
-      SIZE / 2f, -SIZE / 2f, 0.1f)
+      -physicsSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, -physicsSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, 0.1f,
+      -physicsSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, physicsSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, 0.1f,
+      physicsSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, physicsSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, 0.1f,
+      physicsSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, -physicsSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, 0.1f)
 
     val indices = Array[Byte](0, 1, 2, 2, 3, 0)
 

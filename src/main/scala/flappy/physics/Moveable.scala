@@ -8,7 +8,7 @@ import org.jbox2d.dynamics.{Body, BodyDef, FixtureDef}
 
 trait Moveable {
 
-  val SIZE: Float
+  val physicsSize: Float
 
   val fixtureDefProvider: FixtureDefProvider
   val bodyDefProvider: BodyDefProvider

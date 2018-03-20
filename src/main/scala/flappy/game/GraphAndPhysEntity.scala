@@ -7,7 +7,7 @@ import flappy.physics.{Moveable, PhysicsContants}
 import org.jbox2d.common.Vec2
 import org.joml.Matrix4f
 
-abstract class GraphAndPhysEntity(override val SIZE: Float, val physicsPosition: Vec2 = new Vec2(0, 0))
+abstract class GraphAndPhysEntity(override val physicsSize: Float, val physicsPosition: Vec2 = new Vec2(0, 0))
   extends Renderable with Moveable {
 
   val shader: Shader = ShaderManager.getOrDefine("shaders/bird.vert" + "shaders/bird.frag", () => new Shader("shaders/bird.vert", "shaders/bird.frag"))
