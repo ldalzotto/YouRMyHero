@@ -22,4 +22,6 @@ trait Cached[T] {
     })
   }
 
+  def getAll: Seq[T] = cache.values.toList
+
 }

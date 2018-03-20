@@ -14,6 +14,10 @@ trait Renderable {
   val physicsWidthSize: Float
   val physicsHeightSize: Float
 
+  def pr_matrix: Matrix4f = {
+    Camera.pr_matrix
+  }
+
   val mesh: VertexArray = {
     val vertices = Array[Float](
       -physicsWidthSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, -physicsHeightSize * PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2f, 0.1f,
@@ -27,9 +31,6 @@ trait Renderable {
 
     new VertexArray(vertices, indices, tcs)
   }
-
-
-  val pr_matrix: Matrix4f = new Matrix4f().ortho(-Camera.CAMERA_WIDTH, Camera.CAMERA_WIDTH, -Camera.CAMERA_WIDTH * (1 / Camera.RATIO), Camera.CAMERA_WIDTH * (1 / Camera.RATIO), -1, 1)
 
   def render(): Unit = {
 

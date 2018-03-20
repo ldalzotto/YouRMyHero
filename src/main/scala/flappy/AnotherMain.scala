@@ -56,6 +56,7 @@ class AnotherMain extends Runnable {
     glfwSetWindowPos(window, (vidMode.width() - Screen.SCREEN_WIDTH) / 2, (vidMode.height() - Screen.SCREEN_HEIGHT) / 2)
 
     glfwMakeContextCurrent(window)
+
     glfwShowWindow(window)
     GL.createCapabilities()
 
@@ -64,9 +65,9 @@ class AnotherMain extends Runnable {
 
     glActiveTexture(GL_TEXTURE1)
 
-    ground = new Ground(1f, 1f, physicsPosition = new Vec2(0f, -5f))
-    bird = new Bird(2f, 2f)
-    bird2 = new Bird(5f, 10f, physicsPosition = new Vec2(0, 5f))
+    ground = new Ground(2f, 2f, physicsPosition = new Vec2(0f, -5f))
+    bird = new Bird(4f, 4f)
+    bird2 = new Bird(5f, 5f, physicsPosition = new Vec2(0, 5f))
 
     backgounrd = new BackGround()
 

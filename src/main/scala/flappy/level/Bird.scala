@@ -14,7 +14,7 @@ class Bird(override val physicsWidthSize: Float,
   override lazy val fixtureDefProvider: FixtureDefProvider = () => {
     val fixtureDef = new FixtureDef
     fixtureDef.density = 10f
-    fixtureDef.restitution = 0.5f
+    fixtureDef.restitution = 1f
     fixtureDef
   }
 

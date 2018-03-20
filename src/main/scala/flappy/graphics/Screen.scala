@@ -2,8 +2,8 @@ package flappy.graphics
 
 object Screen {
 
-  def SCREEN_WIDTH = 400
+  val SCREEN_WIDTH = 1280
 
-  def SCREEN_HEIGHT = 300
+  val SCREEN_HEIGHT = 720
 
 }
