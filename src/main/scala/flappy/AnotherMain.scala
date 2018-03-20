@@ -1,5 +1,6 @@
 package flappy
 
+import flappy.graphics.Screen
 import flappy.level.{BackGround, Bird, Ground}
 import org.jbox2d.common.Vec2
 import org.jbox2d.dynamics._
@@ -18,8 +19,6 @@ class AnotherMain extends Runnable {
     gameLoop()
   }
 
-  val width: Int = 1066
-  val height = 600
 
   var window: Long = _
 
@@ -44,7 +43,7 @@ class AnotherMain extends Runnable {
     }
 
     glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE)
-    window = glfwCreateWindow(width, height, "Flappy", MemoryUtil.NULL, MemoryUtil.NULL)
+    window = glfwCreateWindow(Screen.SCREEN_WIDTH, Screen.SCREEN_HEIGHT, "Flappy", MemoryUtil.NULL, MemoryUtil.NULL)
     if (window == MemoryUtil.NULL) {
       return
     }
@@ -54,7 +53,7 @@ class AnotherMain extends Runnable {
       return
     }
 
-    glfwSetWindowPos(window, (vidMode.width() - width) / 2, (vidMode.height() - height) / 2)
+    glfwSetWindowPos(window, (vidMode.width() - Screen.SCREEN_WIDTH) / 2, (vidMode.height() - Screen.SCREEN_HEIGHT) / 2)
 
     glfwMakeContextCurrent(window)
     glfwShowWindow(window)
