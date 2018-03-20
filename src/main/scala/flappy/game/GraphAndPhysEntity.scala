@@ -1,6 +1,6 @@
 package flappy.game
 
-import flappy.graphics.Renderable
+import flappy.graphics.render.Renderable
 import flappy.graphics.shader.{Shader, ShaderManager}
 import flappy.graphics.texture.{Texture, TextureManager}
 import flappy.physics.{Moveable, PhysicsContants}
@@ -11,7 +11,7 @@ abstract class GraphAndPhysEntity(override val physicsWidthSize: Float, override
   extends Renderable with Moveable {
 
   val shader: Shader = ShaderManager.getOrDefine("shaders/bird.vert" + "shaders/bird.frag", () => new Shader("shaders/bird.vert", "shaders/bird.frag"))
-  val texture: Texture = TextureManager.getOrDefine("res/block.png", () => new Texture("res/block.png"))
+  override lazy val texture: Texture = TextureManager.getOrDefine("res/block.png", () => new Texture("res/block.png"))
 
   override lazy val physicPosition: Vec2 = {
     Option(body)

@@ -34,7 +34,7 @@ class Timer(window: Long) {
     elapsedTime = now - timer
 
 
-    while (elapsedTimeWorldCount > MyWorld.WORLD_STEP_S / 1000000000) {
+    if (elapsedTimeWorldCount > MyWorld.WORLD_STEP_S / 1000000000) {
 
       ticks = ticks + 1
       beforeTimeWorldCount = beforeTimeWorldCount + (MyWorld.WORLD_STEP_S / 1000000000)
@@ -44,7 +44,7 @@ class Timer(window: Long) {
 
     }
 
-    while (elapsedTime > nanoSeconds) {
+    if (elapsedTime > nanoSeconds) {
       timer = timer + nanoSeconds
       frames = frames + 1
       renderer.apply()

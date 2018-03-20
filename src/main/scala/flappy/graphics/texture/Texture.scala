@@ -11,6 +11,7 @@ class Texture(path: String) {
 
   var width: Int = _
   var height: Int = _
+  var ratio: Float = _
 
   val textureId: Int = load(path)
 
@@ -18,6 +19,7 @@ class Texture(path: String) {
     val image = ImageIO.read(new FileInputStream(path))
     width = image.getWidth
     height = image.getHeight
+    ratio = width.toFloat / height.toFloat
     val pixels = new Array[Int](width * height)
     image.getRGB(0, 0, width, height, pixels, 0, width)
     val data = new Array[Int](width * height)

@@ -1,6 +1,6 @@
 package flappy
 
-import flappy.level.{Bird, Ground}
+import flappy.level.{BackGround, Bird, Ground}
 import org.jbox2d.common.Vec2
 import org.jbox2d.dynamics._
 import org.lwjgl.glfw.GLFW._
@@ -27,6 +27,8 @@ class AnotherMain extends Runnable {
 
   var bird: Bird = _
   var bird2: Bird = _
+
+  var backgounrd: BackGround = _
 
   var body: Body = _
   var ground: Ground = _
@@ -67,13 +69,17 @@ class AnotherMain extends Runnable {
     bird = new Bird(2f, 2f)
     bird2 = new Bird(5f, 10f, physicsPosition = new Vec2(0, 5f))
 
+    backgounrd = new BackGround()
+
     timer = new Timer(window)
-    timer.init()
   }
 
   def gameLoop(): Unit = {
 
+    timer.init()
+
     while (!glfwWindowShouldClose(window)) {
+
 
       glfwPollEvents()
 
@@ -82,10 +88,13 @@ class AnotherMain extends Runnable {
         ground.render()
         bird.render()
         bird2.render()
+        backgounrd.render()
+
         glfwSwapBuffers(window)
       }, (delta) => {
         MyWorld.world.step(delta, 8, 3)
         ground.update()
+        backgounrd.update(delta)
         bird.update()
         bird2.update()
       })

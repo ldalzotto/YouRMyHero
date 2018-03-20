@@ -1,11 +1,15 @@
-package flappy.graphics
+package flappy.graphics.render
 
 import flappy.graphics.shader.Shader
 import flappy.graphics.texture.Texture
+import flappy.graphics.{Camera, VertexArray}
 import flappy.physics.PhysicsContants
 import org.joml.Matrix4f
 
 trait Renderable {
+
+  val shader: Shader
+  val texture: Texture
 
   val physicsWidthSize: Float
   val physicsHeightSize: Float
@@ -23,8 +27,7 @@ trait Renderable {
 
     new VertexArray(vertices, indices, tcs)
   }
-  val shader: Shader
-  val texture: Texture
+
 
   val pr_matrix: Matrix4f = new Matrix4f().ortho(-Camera.CAMERA_WIDTH, Camera.CAMERA_WIDTH, -Camera.CAMERA_WIDTH * 9 / 16, Camera.CAMERA_WIDTH * 9 / 16, -1, 1)
 
