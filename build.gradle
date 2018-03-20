@@ -14,6 +14,8 @@ repositories {
 dependencies {
     compile group: 'org.scala-lang', name: 'scala-library', version: '2.12.4'
     compile group: 'org.joml', name: 'joml', version: '1.9.8'
+    compile group: 'org.jbox2d', name: 'jbox2d-library', version: '2.2.1.1'
+
 
     compile "org.lwjgl:lwjgl:$lwjglVersion"
     compile "org.lwjgl:lwjgl-assimp:$lwjglVersion"

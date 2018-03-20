@@ -1,10 +1,11 @@
-package flappy.graphics
+package flappy.graphics.texture
 
 import java.io.FileInputStream
 import javax.imageio.ImageIO
 
 import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL11.{glGenTextures, _}
+import org.lwjgl.opengl.GL30._
 
 class Texture(path: String) {
 
@@ -31,7 +32,7 @@ class Texture(path: String) {
       data(i) = a << 24 | b << 16 | g << 8 | r
 
       {
-        i += 1;
+        i += 1
         i - 1
       }
     }
@@ -46,6 +47,7 @@ class Texture(path: String) {
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST)
     glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, textureBuffer)
+    glGenerateMipmap(GL_TEXTURE_2D)
     glBindTexture(GL_TEXTURE_2D, 0)
     result
   }

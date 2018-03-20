@@ -1,6 +1,8 @@
 package flappy
 
-import flappy.level.Bird
+import flappy.level.{Bird, Ground}
+import org.jbox2d.common.Vec2
+import org.jbox2d.dynamics._
 import org.lwjgl.glfw.GLFW._
 import org.lwjgl.opengl.GL11._
 import org.lwjgl.opengl.GL13._
@@ -16,12 +18,16 @@ class AnotherMain extends Runnable {
     gameLoop()
   }
 
-  val width: Int = 533
-  val height = 300
+  val width: Int = 1066
+  val height = 600
 
   var window: Long = _
 
   var bird: Bird = _
+  var bird2: Bird = _
+
+  var body: Body = _
+  var ground: Ground = _
 
   def start(): Unit = {
     val thread = new Thread(this, "Game")
@@ -55,17 +61,28 @@ class AnotherMain extends Runnable {
 
     glActiveTexture(GL_TEXTURE1)
 
-    bird = new Bird
+    ground = new Ground(1f, physicsPosition = new Vec2(0f, -1f))
+    bird = new Bird(2f)
+    bird2 = new Bird(5f, physicsPosition = new Vec2(0, 0.5f))
 
   }
 
   def gameLoop(): Unit = {
 
     while (!glfwWindowShouldClose(window)) {
+
+      MyWorld.world.step(0.01f, 8, 6)
+
+      ground.update()
+      bird.update()
+      bird2.update()
+
       glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
       glfwPollEvents()
 
+      ground.render()
       bird.render()
+      bird2.render()
       glfwSwapBuffers(window)
 
 

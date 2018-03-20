@@ -1,5 +1,4 @@
-package flappy.graphics
-
+package flappy.graphics.shader
 
 import flappy.util.ShaderUtils
 import org.joml.Matrix4f
@@ -46,5 +45,8 @@ object Shader {
 
   val VERTEX_ATTRIB = 0
   val TEXCOORD_ATTRIB = 1
+
+  val PROJECTION_MATRIX = "pr_matrix"
+  val VIEW_MATTRIX = "vw_matrix"
 
 }

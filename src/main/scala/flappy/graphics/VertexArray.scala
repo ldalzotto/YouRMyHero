@@ -1,5 +1,6 @@
 package flappy.graphics
 
+import flappy.graphics.shader.Shader
 import org.lwjgl.BufferUtils
 import org.lwjgl.opengl.GL11._
 import org.lwjgl.opengl.GL15._
