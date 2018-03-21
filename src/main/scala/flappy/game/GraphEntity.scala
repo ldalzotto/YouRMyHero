@@ -1,6 +1,6 @@
 package flappy.game
 
-import flappy.graphics.render.RenderableScaledHeight
+import flappy.graphics.render.Renderable
 import flappy.graphics.shader.{Shader, ShaderManager}
 import flappy.graphics.texture.{Texture, TextureManager}
 import org.jbox2d.common.Vec2
@@ -8,7 +8,7 @@ import org.joml.Matrix4f
 
 abstract class GraphEntity(val physicsPosition: Vec2 = new Vec2(0, 0),
                            val vertexPath: String, val fragmentPath: String, val texturePath: String)
-  extends RenderableScaledHeight {
+  extends Renderable {
   val shader: Shader = ShaderManager.getOrDefine(vertexPath + fragmentPath, () => new Shader(vertexPath, fragmentPath))
   override lazy val texture: Texture = TextureManager.getOrDefine(texturePath, () => new Texture(texturePath))
 

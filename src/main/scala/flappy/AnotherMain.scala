@@ -13,7 +13,6 @@ import org.lwjgl.system.MemoryUtil
 
 class AnotherMain extends Runnable {
 
-
   override def run(): Unit = {
     init()
     gameLoop()
@@ -42,7 +41,7 @@ class AnotherMain extends Runnable {
       return
     }
 
-    glfwWindowHint(GLFW_RESIZABLE, GLFW_TRUE)
+    glfwWindowHint(GLFW_RESIZABLE, GLFW_FALSE)
     window = glfwCreateWindow(Screen.SCREEN_WIDTH, Screen.SCREEN_HEIGHT, "Flappy", MemoryUtil.NULL, MemoryUtil.NULL)
     if (window == MemoryUtil.NULL) {
       return
@@ -97,6 +96,7 @@ class AnotherMain extends Runnable {
         backgounrd.update(delta)
         bird.update()
         bird2.update()
+
       })
 
 
