@@ -27,4 +27,5 @@ class Ground(override val physicsWidthSize: Float,
     shape.setAsBox(physicsWidthSize / PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2, physicsHeightSize / PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2)
     shape
   }
+
 }

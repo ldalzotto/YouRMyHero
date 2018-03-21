@@ -4,8 +4,11 @@ import flappy.game.GraphAndPhysEntity
 import flappy.input.Input
 import flappy.physics.PhysicsContants
 import flappy.physics.PhysicsProvider.{BodyDefProvider, FixtureDefProvider, ShapeProvider}
+import org.jbox2d.callbacks.{ContactImpulse, ContactListener}
+import org.jbox2d.collision.Manifold
 import org.jbox2d.collision.shapes.PolygonShape
 import org.jbox2d.common.Vec2
+import org.jbox2d.dynamics.contacts.Contact
 import org.jbox2d.dynamics.{BodyDef, BodyType, FixtureDef}
 import org.lwjgl.glfw.GLFW
 
@@ -38,6 +41,21 @@ class Bird(override val physicsWidthSize: Float,
       applyForceAtCenter(new Vec2(0, 650000))
     }
     super.update()
+  }
+
+  override lazy val contactListener: Option[ContactListener] = Some(Bird.BirdContactListener)
+}
+
+object Bird {
+
+  val BirdContactListener: ContactListener = new ContactListener {
+    override def endContact(contact: Contact): Unit = {}
+
+    override def postSolve(contact: Contact, impulse: ContactImpulse): Unit = {}
+
+    override def preSolve(contact: Contact, oldManifold: Manifold): Unit = {}
+
+    override def beginContact(contact: Contact): Unit = println("CONTANT")
   }
 
 }

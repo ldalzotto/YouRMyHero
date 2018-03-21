@@ -2,7 +2,7 @@ package flappy
 
 import flappy.graphics.Screen
 import flappy.input.Input
-import flappy.level.{BackGround, Bird}
+import flappy.level.{BackGround, Bird, Ground}
 import org.jbox2d.dynamics._
 import org.lwjgl.glfw.GLFW._
 import org.lwjgl.opengl.GL11._
@@ -21,6 +21,7 @@ class AnotherMain extends Runnable {
   var window: Long = _
   var timer: Timer = _
   var bird: Bird = _
+  var ground: Ground = _
   var backgounrd: BackGround = _
   var body: Body = _
 
@@ -60,7 +61,7 @@ class AnotherMain extends Runnable {
     glActiveTexture(GL_TEXTURE1)
 
     bird = new Bird(4f, 4f)
-
+    ground = new Ground(2f, 2f)
     backgounrd = new BackGround()
 
     timer = new Timer(window)
@@ -78,6 +79,7 @@ class AnotherMain extends Runnable {
       timer.updateTimer(() => {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
         bird.render()
+        ground.render()
         backgounrd.render()
 
         glfwSwapBuffers(window)
@@ -85,6 +87,7 @@ class AnotherMain extends Runnable {
         MyWorld.world.step(delta, 8, 3)
         backgounrd.update(delta)
         bird.update()
+        ground.update()
         Input.update()
       })
 
