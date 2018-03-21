@@ -1,11 +1,13 @@
 package flappy.level
 
 import flappy.game.GraphAndPhysEntity
+import flappy.input.Input
 import flappy.physics.PhysicsContants
 import flappy.physics.PhysicsProvider.{BodyDefProvider, FixtureDefProvider, ShapeProvider}
 import org.jbox2d.collision.shapes.PolygonShape
 import org.jbox2d.common.Vec2
 import org.jbox2d.dynamics.{BodyDef, BodyType, FixtureDef}
+import org.lwjgl.glfw.GLFW
 
 class Bird(override val physicsWidthSize: Float,
            override val physicsHeightSize: Float,
@@ -28,6 +30,14 @@ class Bird(override val physicsWidthSize: Float,
     val shape = new PolygonShape
     shape.setAsBox(physicsWidthSize / PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2, physicsHeightSize / PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2)
     shape
+  }
+
+  override def update(): Unit = {
+    if (Input.isJustPressed(GLFW.GLFW_KEY_SPACE)) {
+      setSpeed(new Vec2(0, 0))
+      applyForceAtCenter(new Vec2(0, 650000))
+    }
+    super.update()
   }
 
 }

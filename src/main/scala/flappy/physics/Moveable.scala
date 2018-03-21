@@ -25,6 +25,14 @@ trait Moveable {
     body
   }
 
+  def applyForceAtCenter(force: Vec2): Unit = {
+    body.applyForceToCenter(force)
+  }
+
+  def setSpeed(speed: Vec2): Unit = {
+    body.m_linearVelocity.set(speed)
+  }
+
 }
 
 object PhysicsProvider {

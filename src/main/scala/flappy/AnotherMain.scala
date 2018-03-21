@@ -1,8 +1,8 @@
 package flappy
 
 import flappy.graphics.Screen
-import flappy.level.{BackGround, Bird, Ground}
-import org.jbox2d.common.Vec2
+import flappy.input.Input
+import flappy.level.{BackGround, Bird}
 import org.jbox2d.dynamics._
 import org.lwjgl.glfw.GLFW._
 import org.lwjgl.opengl.GL11._
@@ -18,18 +18,11 @@ class AnotherMain extends Runnable {
     gameLoop()
   }
 
-
   var window: Long = _
-
   var timer: Timer = _
-
   var bird: Bird = _
-  var bird2: Bird = _
-
   var backgounrd: BackGround = _
-
   var body: Body = _
-  var ground: Ground = _
 
   def start(): Unit = {
     val thread = new Thread(this, "Game")
@@ -52,6 +45,8 @@ class AnotherMain extends Runnable {
       return
     }
 
+    glfwSetKeyCallback(window, Input)
+
     glfwSetWindowPos(window, (vidMode.width() - Screen.SCREEN_WIDTH) / 2, (vidMode.height() - Screen.SCREEN_HEIGHT) / 2)
 
     glfwMakeContextCurrent(window)
@@ -64,9 +59,7 @@ class AnotherMain extends Runnable {
 
     glActiveTexture(GL_TEXTURE1)
 
-    ground = new Ground(2f, 2f, physicsPosition = new Vec2(0f, -5f))
     bird = new Bird(4f, 4f)
-    bird2 = new Bird(5f, 5f, physicsPosition = new Vec2(0, 5f))
 
     backgounrd = new BackGround()
 
@@ -84,19 +77,15 @@ class AnotherMain extends Runnable {
 
       timer.updateTimer(() => {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
-        ground.render()
         bird.render()
-        bird2.render()
         backgounrd.render()
 
         glfwSwapBuffers(window)
       }, (delta) => {
         MyWorld.world.step(delta, 8, 3)
-        ground.update()
         backgounrd.update(delta)
         bird.update()
-        bird2.update()
-
+        Input.update()
       })
 
 
