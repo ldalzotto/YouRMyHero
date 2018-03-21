@@ -10,6 +10,8 @@ class BackGround(override val physicsPosition: Vec2 = new Vec2(0, 0))
     with RenderableScaledHeight
     with XScrollable {
 
+  override lazy val scrollSpeed: Vec2 = new Vec2(-10f, 0f)
+
   def update(delta: Float): Unit = {
     updateScroll(delta)
   }

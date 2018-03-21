@@ -4,6 +4,9 @@ import flappy.graphics.Camera
 import flappy.graphics.scroll.Scrollable._
 import org.jbox2d.common.Vec2
 
+/**
+  * [[XScrollable]] Définit les différents propriétés de [[Scrollable]] pour autoriser une scrolling vertical.
+  */
 trait XScrollable extends Scrollable {
 
   override lazy val textureNumberProvider: TextureNumberProvider = () => {
@@ -15,8 +18,6 @@ trait XScrollable extends Scrollable {
   override lazy val firstTextureInFromPositionProvider: FirstTextureInFromPositionProvider =
     () => new Vec2(-Camera.CAMERA_WIDTH + (physicsWidthSize / 2), 0)
 
-  override lazy val scrollSpeed: Vec2 = new Vec2(-25f, 0)
-
   override lazy val whenTextureHaveToRespawn: WhenTextureHaveToRespawn = pos => (pos.x + physicsWidthSize / 2) <= -screenWidthInPhysics
 
   override lazy val deltaPosAppliedToTexturesHaveToRespawn: DeltaPosAppliedToTexturesHaveToRespawn = () => {
@@ -26,4 +27,5 @@ trait XScrollable extends Scrollable {
   override lazy val deltaForClippingApplyer: DeltaForClippingApplyer = {
     case (position, (deltaX, _)) => position.set(position.add(new Vec2(-deltaX, 0)))
   }
+  override val positionSorterForAntiClipping: PositionSorterForAntiClipping = (v1, v2) => v1.x <= v2.x
 }
