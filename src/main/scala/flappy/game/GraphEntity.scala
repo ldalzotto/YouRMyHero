@@ -12,6 +12,9 @@ abstract class GraphEntity(val physicsPosition: Vec2 = new Vec2(0, 0),
   val shader: Shader = ShaderManager.getOrDefine(vertexPath + fragmentPath, () => new Shader(vertexPath, fragmentPath))
   override lazy val texture: Texture = TextureManager.getOrDefine(texturePath, () => new Texture(texturePath))
 
+  shader.setUniformMat4f(Shader.PROJECTION_MATRIX, pr_matrix)
+  shader.setUniformli("tex", 1)
+
   def render(viewMatrix: Matrix4f): Unit = {
     shader.setUniformMat4f(Shader.VIEW_MATTRIX, viewMatrix)
     super.render()

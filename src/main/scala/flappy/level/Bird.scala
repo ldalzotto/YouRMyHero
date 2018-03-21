@@ -10,11 +10,13 @@ import org.jbox2d.collision.shapes.PolygonShape
 import org.jbox2d.common.Vec2
 import org.jbox2d.dynamics.contacts.Contact
 import org.jbox2d.dynamics.{BodyDef, BodyType, FixtureDef}
+import org.joml.Matrix4f
 import org.lwjgl.glfw.GLFW
 
 class Bird(override val physicsWidthSize: Float,
            override val physicsHeightSize: Float,
-           override val physicsPosition: Vec2 = new Vec2(0, 0)) extends GraphAndPhysEntity(physicsWidthSize, physicsHeightSize, physicsPosition) {
+           override val physicsPosition: Vec2 = new Vec2(0, 0)) extends
+  GraphAndPhysEntity(physicsWidthSize, physicsHeightSize, physicsPosition, "shaders/bird.vert", "shaders/bird.frag", "res/block.png") {
 
   override lazy val fixtureDefProvider: FixtureDefProvider = () => {
     val fixtureDef = new FixtureDef
@@ -33,6 +35,10 @@ class Bird(override val physicsWidthSize: Float,
     val shape = new PolygonShape
     shape.setAsBox(physicsWidthSize / PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2, physicsHeightSize / PhysicsContants.PHYSICS_WORLD_UNIT_INT_PIXEL / 2)
     shape
+  }
+
+  override def render(): Unit = {
+    super.render(new Matrix4f().identity())
   }
 
   override def update(): Unit = {
@@ -55,7 +61,7 @@ object Bird {
 
     override def preSolve(contact: Contact, oldManifold: Manifold): Unit = {}
 
-    override def beginContact(contact: Contact): Unit = println("CONTANT")
+    override def beginContact(contact: Contact): Unit = {}
   }
 
 }

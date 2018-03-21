@@ -3,6 +3,7 @@ package flappy
 import flappy.graphics.Screen
 import flappy.input.Input
 import flappy.level.{BackGround, Bird, Ground}
+import org.jbox2d.common.Vec2
 import org.jbox2d.dynamics._
 import org.lwjgl.glfw.GLFW._
 import org.lwjgl.opengl.GL11._
@@ -60,9 +61,9 @@ class AnotherMain extends Runnable {
 
     glActiveTexture(GL_TEXTURE1)
 
-    bird = new Bird(4f, 4f)
-    ground = new Ground(2f, 2f)
-    backgounrd = new BackGround()
+    bird = new Bird(4f, 4f, new Vec2(-25, 0))
+    ground = new Ground(60f, 10f, new Vec2(0, -23))
+    backgounrd = new BackGround(new Vec2(0, 5))
 
     timer = new Timer(window)
   }
@@ -87,7 +88,7 @@ class AnotherMain extends Runnable {
         MyWorld.world.step(delta, 8, 3)
         backgounrd.update(delta)
         bird.update()
-        ground.update()
+        ground.update(delta)
         Input.update()
       })
 
