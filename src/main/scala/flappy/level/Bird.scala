@@ -15,8 +15,8 @@ import org.lwjgl.glfw.GLFW
 
 class Bird(override val physicsWidthSize: Float,
            override val physicsHeightSize: Float,
-           override val physicsPosition: Vec2 = new Vec2(0, 0)) extends
-  GraphAndPhysEntity(physicsWidthSize, physicsHeightSize, physicsPosition, "shaders/bird.vert", "shaders/bird.frag", "res/block.png") {
+           override val initialPhysicsPosition: Vec2 = new Vec2(0, 0)) extends
+  GraphAndPhysEntity(physicsWidthSize, physicsHeightSize, initialPhysicsPosition, "shaders/bird.vert", "shaders/bird.frag", "res/block.png") {
 
   override lazy val fixtureDefProvider: FixtureDefProvider = () => {
     val fixtureDef = new FixtureDef
