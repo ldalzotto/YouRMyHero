@@ -2,6 +2,7 @@ package flappy.level
 
 import flappy.game.GraphAndPhysEntity
 import flappy.graphics.scroll.XScrollable
+import flappy.level.constants.ScrollSpeeds
 import flappy.physics.PhysicsContants
 import flappy.physics.PhysicsProvider.{BodyDefProvider, FixtureDefProvider, ShapeProvider}
 import org.jbox2d.collision.shapes.PolygonShape
@@ -14,7 +15,9 @@ class Ground(override val physicsWidthSize: Float,
   extends GraphAndPhysEntity(physicsWidthSize, physicsHeightSize, physicsPosition, "shaders/bird.vert", "shaders/bird.frag", "res/ground.png")
     with XScrollable {
 
-  override lazy val scrollSpeed: Vec2 = new Vec2(-40, 0)
+  override lazy val userDataTag: String = Ground.USER_DATA_TAG
+
+  override lazy val scrollSpeed: Vec2 = ScrollSpeeds.GROUND_SPEED
 
   override lazy val fixtureDefProvider: FixtureDefProvider = () => {
     val fixtureDef = new FixtureDef
@@ -46,4 +49,8 @@ class Ground(override val physicsWidthSize: Float,
     shape
   }
 
+}
+
+object Ground {
+  val USER_DATA_TAG: String = Ground.getClass.getSimpleName
 }

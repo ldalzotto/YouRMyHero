@@ -13,6 +13,8 @@ object Input extends GLFWKeyCallback with KeysJustPressed {
       if (action != GLFW.GLFW_REPEAT) {
         keyPushed(key)
       }
+    } else {
+      keys(key) = false
     }
   }
 

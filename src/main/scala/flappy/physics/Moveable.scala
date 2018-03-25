@@ -12,6 +12,8 @@ trait Moveable {
   val bodyDefProvider: BodyDefProvider
   val shapeProvider: ShapeProvider
 
+  val userDataTag: String
+
   val physicPosition: Vec2
 
   val body: Body = {
@@ -20,8 +22,10 @@ trait Moveable {
     val body = MyWorld.world.createBody(bodyDef)
     val shape = shapeProvider.apply()
     val fixtureDef = fixtureDefProvider.apply()
+    fixtureDef.userData = userDataTag
     fixtureDef.shape = shape
     body.createFixture(fixtureDef)
+    body.setUserData(userDataTag)
     body
   }
 
@@ -31,6 +35,10 @@ trait Moveable {
 
   def setSpeed(speed: Vec2): Unit = {
     body.m_linearVelocity.set(speed)
+  }
+
+  def setPosition(position: Vec2): Unit = {
+    body.m_xf.p.set(position)
   }
 
 }

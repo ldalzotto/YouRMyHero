@@ -38,6 +38,11 @@ trait Scrollable {
   val deltaPosAppliedToTexturesHaveToRespawn: DeltaPosAppliedToTexturesHaveToRespawn
 
   /**
+    * <p>Permet d'activer ou non l'anti clipping
+    */
+  val antiClippingActivated: Boolean = true
+
+  /**
     * <p>Permet d'appliquer le delta de position pour l'anti-clipping.</p>
     */
   val deltaForClippingApplyer: DeltaForClippingApplyer
@@ -128,7 +133,9 @@ trait Scrollable {
     allTextureThatHaveToMove
       .foreach(_.set(deltaPosAppliedToTexturesHaveToRespawn.apply()))
 
-    adjustForClipping()
+    if (antiClippingActivated) {
+      adjustForClipping()
+    }
   }
 
   private def adjustForClipping(): Unit = {

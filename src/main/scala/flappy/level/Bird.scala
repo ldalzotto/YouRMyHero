@@ -4,26 +4,25 @@ import flappy.game.GraphAndPhysEntity
 import flappy.input.Input
 import flappy.physics.PhysicsContants
 import flappy.physics.PhysicsProvider.{BodyDefProvider, FixtureDefProvider, ShapeProvider}
+import flappy.physics.definitions.FixtureDefDefinitions
 import org.jbox2d.callbacks.{ContactImpulse, ContactListener}
 import org.jbox2d.collision.Manifold
 import org.jbox2d.collision.shapes.PolygonShape
 import org.jbox2d.common.Vec2
 import org.jbox2d.dynamics.contacts.Contact
-import org.jbox2d.dynamics.{BodyDef, BodyType, FixtureDef}
+import org.jbox2d.dynamics.{BodyDef, BodyType}
 import org.joml.Matrix4f
 import org.lwjgl.glfw.GLFW
 
 class Bird(override val physicsWidthSize: Float,
            override val physicsHeightSize: Float,
            override val initialPhysicsPosition: Vec2 = new Vec2(0, 0)) extends
-  GraphAndPhysEntity(physicsWidthSize, physicsHeightSize, initialPhysicsPosition, "shaders/bird.vert", "shaders/bird.frag", "res/block.png") {
+  GraphAndPhysEntity(physicsWidthSize, physicsHeightSize, initialPhysicsPosition, "shaders/bird.vert", "shaders/bird.frag", "res/hero/hero.png") {
 
-  override lazy val fixtureDefProvider: FixtureDefProvider = () => {
-    val fixtureDef = new FixtureDef
-    fixtureDef.density = 10f
-    fixtureDef.restitution = 1f
-    fixtureDef
-  }
+  override lazy val userDataTag: String = Bird.USER_DATA_TAG
+
+  override lazy val fixtureDefProvider: FixtureDefProvider =
+    () => FixtureDefDefinitions.createFixtureDef(Some(10f), None, Some(1f))
 
   override lazy val bodyDefProvider: BodyDefProvider = () => {
     val bodyDef = new BodyDef
@@ -53,6 +52,8 @@ class Bird(override val physicsWidthSize: Float,
 }
 
 object Bird {
+
+  val USER_DATA_TAG:String = Bird.getClass.getSimpleName
 
   val BirdContactListener: ContactListener = new ContactListener {
     override def endContact(contact: Contact): Unit = {}
