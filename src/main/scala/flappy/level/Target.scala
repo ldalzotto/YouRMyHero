@@ -6,6 +6,7 @@ import flappy.physics.PhysicsContants
 import flappy.physics.PhysicsProvider.{BodyDefProvider, FixtureDefProvider, ShapeProvider}
 import flappy.physics.contact.ContactListenerInstanceRestricted
 import flappy.physics.definitions.FixtureDefDefinitions
+import flappy.physics.shape.RectangleBody
 import org.jbox2d.callbacks.ContactListener
 import org.jbox2d.collision.Manifold
 import org.jbox2d.collision.shapes.PolygonShape
@@ -17,7 +18,7 @@ import org.joml.Matrix4f
 class Target(override val physicsWidthSize: Float,
              override val physicsHeightSize: Float,
              override val initialPhysicsPosition: Vec2 = new Vec2(0, 0))
-  extends GraphAndPhysEntity(physicsWidthSize, physicsHeightSize, initialPhysicsPosition, "shaders/bird.vert", "shaders/bird.frag", "res/hero/hero.png") {
+  extends GraphAndPhysEntity(physicsWidthSize, physicsHeightSize, initialPhysicsPosition, "shaders/bird.vert", "shaders/bird.frag", "res/hero/hero.png") with RectangleBody {
 
   override lazy val userDataTag: String = Target.USER_DATA_TAG
 
@@ -35,7 +36,6 @@ class Target(override val physicsWidthSize: Float,
     val bodyDef = new BodyDef
     bodyDef.`type` = BodyType.DYNAMIC
     bodyDef.gravityScale = 0f
-    bodyDef.linearDamping = 0.9f
     bodyDef
   }
 

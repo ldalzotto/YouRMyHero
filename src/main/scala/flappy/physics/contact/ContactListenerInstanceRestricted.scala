@@ -1,6 +1,7 @@
 package flappy.physics.contact
 
 import flappy.game.PhysEntity
+import flappy.physics.UserData
 import org.jbox2d.callbacks.{ContactImpulse, ContactListener}
 import org.jbox2d.collision.Manifold
 import org.jbox2d.dynamics.contacts.Contact
@@ -36,22 +37,38 @@ trait ContactListenerInstanceRestricted extends ContactListener {
   }
 
   private def isCurrentEntity(contact: Contact): Boolean = {
-    (contact.getFixtureA.getUserData == initialPhysEntity.userDataTag) || (contact.getFixtureB.getUserData == initialPhysEntity.userDataTag)
+
+    val fixtureAUD: UserData = contact.getFixtureA.getUserData.asInstanceOf[UserData]
+    val fixtureBUD: UserData = contact.getFixtureB.getUserData.asInstanceOf[UserData]
+
+    checkIfTagAreEquals(fixtureAUD, initialPhysEntity) || checkIfTagAreEquals(fixtureBUD, initialPhysEntity)
   }
 
   private def currentContactEntityFilter(contact: Contact): Boolean = {
 
-    if (contact.getFixtureA.getUserData == initialPhysEntity.userDataTag) {
-      if (listOfDesiredEntityHandling == Nil || listOfDesiredEntityHandling.contains(contact.getFixtureB.getUserData)) {
+    val fixtureAUD: UserData = contact.getFixtureA.getUserData.asInstanceOf[UserData]
+    val fixtureBUD: UserData = contact.getFixtureB.getUserData.asInstanceOf[UserData]
+
+    if (checkIfTagAreEquals(fixtureAUD, initialPhysEntity)) {
+      if (checkIfTagIsContainedInDesiredEntityTags(fixtureBUD)) {
         return true
       }
     }
-    if (contact.getFixtureB.getUserData == initialPhysEntity.userDataTag) {
-      if (listOfDesiredEntityHandling == Nil || listOfDesiredEntityHandling.contains(contact.getFixtureA.getUserData)) {
+    if (checkIfTagAreEquals(fixtureBUD, initialPhysEntity)) {
+      if (checkIfTagIsContainedInDesiredEntityTags(fixtureAUD)) {
         return true
       }
     }
+
     false
+  }
+
+  private def checkIfTagAreEquals(userData: UserData, physEntity: PhysEntity): Boolean = {
+    userData.tag == physEntity.userDataTag
+  }
+
+  private def checkIfTagIsContainedInDesiredEntityTags(userData: UserData): Boolean = {
+    listOfDesiredEntityHandling == Nil || listOfDesiredEntityHandling.contains(userData.tag)
   }
 
 }

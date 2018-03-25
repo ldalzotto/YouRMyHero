@@ -63,7 +63,7 @@ class AnotherMain extends Runnable {
     glActiveTexture(GL_TEXTURE1)
 
     bird = new Bird(6f, 4f, new Vec2(-25, 0))
-    target = new Target(6f, 4f, new Vec2(25, 0))
+    target = new Target(3f, 6f, new Vec2(25, -15))
     ground = new Ground(60f, 10f, new Vec2(0, -23))
     backgounrd = new BackGround(new Vec2(0, 5))
 
@@ -91,7 +91,7 @@ class AnotherMain extends Runnable {
         MyWorld.world.step(delta, 8, 3)
         backgounrd.update(delta)
         target.update(delta)
-        bird.update()
+        bird.update(delta)
         ground.update(delta)
         Input.update()
       })

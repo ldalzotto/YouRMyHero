@@ -5,6 +5,7 @@ import flappy.input.Input
 import flappy.physics.PhysicsContants
 import flappy.physics.PhysicsProvider.{BodyDefProvider, FixtureDefProvider, ShapeProvider}
 import flappy.physics.definitions.FixtureDefDefinitions
+import flappy.physics.shape.RectangleBody
 import org.jbox2d.callbacks.{ContactImpulse, ContactListener}
 import org.jbox2d.collision.Manifold
 import org.jbox2d.collision.shapes.PolygonShape
@@ -17,7 +18,8 @@ import org.lwjgl.glfw.GLFW
 class Bird(override val physicsWidthSize: Float,
            override val physicsHeightSize: Float,
            override val initialPhysicsPosition: Vec2 = new Vec2(0, 0)) extends
-  GraphAndPhysEntity(physicsWidthSize, physicsHeightSize, initialPhysicsPosition, "shaders/bird.vert", "shaders/bird.frag", "res/hero/hero.png") {
+  GraphAndPhysEntity(physicsWidthSize, physicsHeightSize, initialPhysicsPosition, "shaders/bird.vert", "shaders/bird.frag", "res/hero/hero.png") with
+  RectangleBody {
 
   override lazy val userDataTag: String = Bird.USER_DATA_TAG
 
@@ -40,11 +42,16 @@ class Bird(override val physicsWidthSize: Float,
     super.render(new Matrix4f().identity())
   }
 
-  override def update(): Unit = {
+  def update(delta: Float): Unit = {
     if (Input.isJustPressed(GLFW.GLFW_KEY_SPACE)) {
       setSpeed(new Vec2(0, 0))
       applyForceAtCenter(new Vec2(0, 650000))
     }
+
+    if (Input.isJustPressed(GLFW.GLFW_KEY_DOWN)) {
+      addSpeed(new Vec2(0, -50))
+    }
+
     super.update()
   }
 
@@ -53,7 +60,7 @@ class Bird(override val physicsWidthSize: Float,
 
 object Bird {
 
-  val USER_DATA_TAG:String = Bird.getClass.getSimpleName
+  val USER_DATA_TAG: String = Bird.getClass.getSimpleName
 
   val BirdContactListener: ContactListener = new ContactListener {
     override def endContact(contact: Contact): Unit = {}
