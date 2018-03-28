@@ -57,8 +57,17 @@ object Target {
     override val initialPhysEntity: PhysEntity = instance
     override val listOfDesiredEntityHandling: Seq[String] = Seq(Bird.USER_DATA_TAG)
     override val physicsContactEnabled: Boolean = false
-    override val preSolveAfterFilter: (Contact, Manifold) => Unit = (contact, _) => {
-      println(s"Target $instance entered in contact:")
+
+    override val preSolveAfterFilter: (Contact, Manifold, AnyRef) => Unit = (contact, _, contactedEntity) => {
+      contactedEntity match {
+        case bird: Bird =>
+          println(s"Target $instance contact with Bird")
+          val upperTarget = instance.initialTopWorld().center()
+          val rightBird = bird.initialRightWorld().center()
+          bird.applyForceAtCenter(new Vec2(0, 3000000))
+          println(s"Uppertarget : $upperTarget + Rightbird : $rightBird")
+        case _ => println("Other contact")
+      }
     }
   }
 
